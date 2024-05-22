@@ -250,11 +250,11 @@ def check_value_in_previous_pes(PEs, pe_id, value, inc_current=False):
     bool: True if the value is found in the specified PE's array, False otherwise.
     """
 
-    if pe_id in PEs:
-        array = PEs[pe_id]  # Directly access the array if the key exists
-        return value in array
-    else:
-        return False  # Return False if the key does not exist
+    for id in range(0, pe_id + int(inc_current)):
+        array = PEs[id]  # Directly access the array if the key exists
+        if value in array:
+            return True
+    return False  # Return False if the key does not exist
 
 @njit(fastmath=True)
 def run_GaBP(A, b, max_iter=100, convergence_threshold=1e-5, show=True):
