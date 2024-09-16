@@ -23,7 +23,7 @@ def process_designs(designs, num_iterations, progress_queue=None, output_list=No
         node_updates_per_pe = design['nodes_updt_per_pe']
         number_pes = design['number_pes']
         policy = design['policy']
-        capping = design['capping']
+        cache = design['cache']
         sum_of_iterations = 0
         for it in range(num_iterations):
             if policy == 'fixed':
@@ -40,7 +40,7 @@ def process_designs(designs, num_iterations, progress_queue=None, output_list=No
                     convergence_threshold=simulation_convergence_threshold,
                     show=False,
                     mode=policy,
-                    capping=capping,
+                    caching=cache,
                     node_update_schedule_enter=node_update_schedule,
                     shuffled_fixed=True
                 )
@@ -51,13 +51,45 @@ def process_designs(designs, num_iterations, progress_queue=None, output_list=No
                     node_updates_per_pe=node_updates_per_pe, 
                     number_pes=number_pes, 
                     TRUE_MEAN=final_mean, 
-                    max_iter=1000000, 
+                    max_iter=100000, 
                     mae=True, 
                     convergence_threshold=simulation_convergence_threshold,
                     show=False,
                     mode=policy,
-                    capping=capping
+                    caching=cache
                 )
+            elif policy == 'random-exclusion':
+                P_i, mu_i, iteration = run_GaBP_HARDWARE_ACCELERATED(
+                    A, 
+                    b, 
+                    node_updates_per_pe=node_updates_per_pe, 
+                    number_pes=number_pes, 
+                    TRUE_MEAN=final_mean, 
+                    max_iter=1000000, 
+                    mae=True, 
+                    convergence_threshold=simulation_convergence_threshold,
+                    show=False,
+                    mode="random-exception", # change to random-exception
+                    caching=cache
+                )
+            elif policy == 'residual':
+                P_i, mu_i, iteration = run_GaBP_HARDWARE_ACCELERATED(
+                    A, 
+                    b, 
+                    node_updates_per_pe=node_updates_per_pe, 
+                    number_pes=number_pes, 
+                    TRUE_MEAN=final_mean, 
+                    max_iter=1000000, 
+                    mae=True, 
+                    convergence_threshold=simulation_convergence_threshold,
+                    show=False,
+                    mode="random", # change to residual
+                    caching=cache
+                )
+            else:
+                print(policy)
+                print("----------------")
+                raise Exception("Error: No Matching Policy")
             sum_of_iterations += iteration
             if progress_queue == None:
                 pass
@@ -65,6 +97,7 @@ def process_designs(designs, num_iterations, progress_queue=None, output_list=No
                 progress_queue.put(1)
         ave_convergence = sum_of_iterations / num_iterations
         design['stream_passes'] = ave_convergence
+        design['convergence_latency'] = ave_convergence * design['latency']
         output_designs.append(design)
 
     if output_list is not None:
@@ -88,7 +121,7 @@ parser = argparse.ArgumentParser(description='Generate Designs')
 parser.add_argument('-save', type=str, help='name of file to be saved', default="")
 filename = parser.parse_args().save
 
-filename = "1000_nodes_1000_factors_sf_65_random_fixed"
+filename = "slam_1d_100"
 with open(f"Hardware_Model/designs/{filename}.json") as f:
     data = json.load(f)
 
@@ -102,17 +135,20 @@ unique_combinations = set()
 # Initialize lists to store calculated values
 pe_node_allocation = []
 
-policies = ['fixed', 'random']
+policies = ['fixed', 'random', 'residual']
 
 # Iterate through each design
 for design in designs:
     # Calculate performance value
     number_pes = design['design']['number_pes'] 
     nodes_updt_per_pe = design['design']['nodes_updt_per_pe']
-    capping = design['design']['capping']
+    cache = design['design']['cache']
     policy = design['design']['policy']
-    if {"number_pes": number_pes, "nodes_updt_per_pe": nodes_updt_per_pe, "capping": capping, "policy": policy} not in pe_node_allocation:
-        pe_node_allocation.append({"number_pes": number_pes, "nodes_updt_per_pe": nodes_updt_per_pe, "capping": capping, "policy": policy})
+    latency = design['latency']['latency_total']
+    n_p = number_pes * nodes_updt_per_pe
+    Rcf = n_p/latency
+    if {"number_pes": number_pes, "nodes_updt_per_pe": nodes_updt_per_pe, "np": n_p, "Rcf": Rcf, "policy": policy, "latency": latency, "cache": cache} not in pe_node_allocation:
+        pe_node_allocation.append({"number_pes": number_pes, "nodes_updt_per_pe": nodes_updt_per_pe, "np": n_p, "Rcf":Rcf, "policy": policy, "latency": latency, "cache": cache})
 
 """Run Simulations"""
 
@@ -130,17 +166,17 @@ graph = NetworkxGraph(A)
 
 sync_convergence_threshold = 1*10**-8 # convergence threshold
 convergence_type = 'all'
-simulation_convergence_threshold = 0.1
+simulation_convergence_threshold = 1*10**-2
 
 # Initialize lists to store number of steam passes
 pe_node_convergence = []
 
 # Run syncrhonous implementation
-num_iterations = 1
+num_iterations = 100
 for it in range(0,num_iterations):
     P_i, mu_i, N_i, P_ii, mu_ii, P_ij, mu_ij, iter_dist, stand_divs, means, iteration = run_GaBP_SYNC_ACCELERATED(A, 
                                                                                                       b, 
-                                                                                                      max_iter=1000, 
+                                                                                                      max_iter=5000, 
                                                                                                       mae=True if convergence_type == 'mae' else False, 
                                                                                                       convergence_threshold=simulation_convergence_threshold,
                                                                                                       show=True)
@@ -148,7 +184,7 @@ for it in range(0,num_iterations):
 print("True Marginals Computed")
 
 # iterate over PE and node updates per PE
-num_iterations = 100
+num_iterations = 10
 total_iterations = len(pe_node_allocation) * num_iterations
 pbar = tqdm(total=total_iterations, desc="Running GBP Simulations", unit="designs")
 

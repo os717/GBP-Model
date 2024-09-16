@@ -3,6 +3,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
 import networkx as nx
 import matplotlib as plt
+import os
 
 from .gbp import find_edges
 
@@ -211,16 +212,10 @@ class DataGenerator:
 
         A = self.symmetric(np.triu(A_sparce)) + np.diag(np.diag(A_rand))
         A = np.abs(A)
-        
-        if scaling:
-            scaling_factors_A = np.random.randint(1, 1001, size=A.shape)  # Generate random scaling factors for each element in A
-            A = A * scaling_factors_A
+
+        A = A / np.sum(A)
         
         b = np.abs(np.random.randn(dim, 1))
-        
-        if scaling:
-            scaling_factors_b = np.random.randint(1, 1001, size=b.shape)  # Generate random scaling factors for each element in b
-            b = b * scaling_factors_b
         
         b = b / np.sum(b) if normalized else b.reshape(-1)
 
@@ -262,10 +257,374 @@ class DataGenerator:
         A = np.abs(A)
 
         b = np.abs(np.random.randn(number_nodes, 1))
-        b = b / np.sum(b)
+
+        # b = b / np.sum(b)
         b = b.reshape(-1)
         
         return A, b
+    
+    def get_2D_lattice_matrix_PSD(self, dim_x, dim_y):
+        number_nodes = dim_x * dim_y
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Step 3: Apply the lattice padding mask
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        A = A * A_pad
+        
+        # Step 4: Ensure symmetry and apply any necessary adjustments
+        A = (A + A.T) / 2  # Symmetrize A
+        
+        b = np.abs(np.random.randn(number_nodes, 1))
+        
+        b = b.reshape(-1)
+        
+        return A, b
+    
+    def get_2D_lattice_matrix_PSD_TEST(self, dim_x, dim_y):
+        number_nodes = dim_x * dim_y
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Step 3: Apply the lattice padding mask
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        A = A * A_pad
+        
+        # Step 4: Ensure symmetry and apply any necessary adjustments
+        # A = (A + A.T) / 2  # Symmetrize A
+        
+        b = np.abs(np.random.randn(number_nodes, 1))
+        
+        b = b.reshape(-1)
+        
+        return A, b
+
+    def get_2D_lattice_matrix_PSD_slow(self, dim_x, dim_y, perturbation_strength=0.01, rank=5, regularization_strength=1e-3):
+        number_nodes = dim_x * dim_y
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Apply the lattice padding mask to B
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        B = B * A_pad  # Apply padding to B
+        
+        # Step 3: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Step 4: Apply a low-rank perturbation to spread the eigenvalues
+        C = np.random.randn(number_nodes, rank)  # Low-rank perturbation
+        P = perturbation_strength * np.dot(C, C.T)
+        
+        A += P  # Add the low-rank perturbation to A
+        
+        # Step 5: Add a regularization term to maintain the condition number and prevent ill-conditioning
+        A += regularization_strength * np.eye(number_nodes)
+        
+        # Step 6: Ensure symmetry (A should already be symmetric by construction, but for safety)
+        A = (A + A.T) / 2  # Symmetrize A to handle any floating-point errors
+        
+        # Step 7: Create a random vector b
+        b = np.abs(np.random.randn(number_nodes, 1))
+        b = b.reshape(-1)
+        
+        return A, b
+    
+    def get_2D_lattice_matrix_PSD_shaped(self, dim_x, dim_y, eigenvalue_spread=10, regularization_strength=1e-4):
+        number_nodes = dim_x * dim_y
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Apply the lattice padding mask to B
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        B = B * A_pad
+        
+        # Step 3: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Apply lattice padding mask to keep the original zero entries
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        A = A * A_pad  # Ensure zero entries remain zero
+        
+        # Step 4: Perform eigenvalue decomposition
+        eigvals, eigvecs = np.linalg.eigh(A)
+        
+        # Step 5: Modify the eigenvalue spectrum with a smaller spread
+        eigvals = np.linspace(1, eigenvalue_spread, number_nodes)
+        
+        # Ensure no eigenvalues are too small
+        eigvals = np.clip(eigvals, 1e-4, None)
+        
+        # Step 6: Reconstruct the matrix A with the modified eigenvalue spectrum
+        A = eigvecs @ np.diag(eigvals) @ eigvecs.T
+        
+        # Step 7: Add minimal regularization to avoid ill-conditioning
+        A += regularization_strength * np.eye(number_nodes)
+        
+        # Step 8: Apply lattice padding mask again to preserve zero entries
+        A = A * A_pad  # Ensure zero entries remain zero
+        
+        # Symmetrize A to handle floating-point errors
+        A = (A + A.T) / 2
+        
+        # Check condition number
+        condition_number = np.linalg.cond(A)
+        print(f"Condition number of A: {condition_number}")
+        
+        # Step 9: Create a random vector b
+        b = np.abs(np.random.randn(number_nodes, 1))
+        b = b.reshape(-1)
+        
+        return A, b
+    
+    def get_1D_line_matrix_PSD_difficult(self, dim, eigenvalue_spread=1e3, regularization_strength=1e-2, noise_strength=1e-2, show=False):
+        number_nodes = dim
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Apply the lattice padding mask to B
+        A_pad = self.fetch_1D_line_padding(number_nodes)
+        B = B * A_pad
+        
+        # Step 3: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Apply lattice padding mask to keep the original zero entries
+        A = A * A_pad  # Ensure zero entries remain zero
+        
+        # Step 4: Perform eigenvalue decomposition
+        eigvals, eigvecs = np.linalg.eigh(A)
+        
+        # Step 5: Modify the eigenvalue spectrum with a larger spread
+        eigvals = np.linspace(1, eigenvalue_spread, number_nodes)
+        
+        # Ensure no eigenvalues are too small
+        eigvals = np.clip(eigvals, 1e-2, None)
+        
+        # Step 6: Reconstruct the matrix A with the modified eigenvalue spectrum
+        A = eigvecs @ np.diag(eigvals) @ eigvecs.T
+        
+        # Step 7: Add larger regularization to avoid ill-conditioning
+        A += regularization_strength * np.eye(number_nodes)
+        
+        # Step 8: Apply lattice padding mask again to preserve zero entries
+        A = A * A_pad  # Ensure zero entries remain zero
+        
+        # Step 9: Introduce random noise to the non-zero entries
+        noise = noise_strength * np.random.randn(number_nodes, number_nodes)
+        A += noise * A_pad  # Apply noise only where the mask is non-zero
+        
+        # Symmetrize A to handle floating-point errors
+        A = (A + A.T) / 2
+        
+        # Check condition number
+        condition_number = np.linalg.cond(A)
+        if show:
+            print(f"Condition number of A: {condition_number}")
+        
+        # Step 10: Create a random vector b
+        b = np.abs(np.random.randn(number_nodes, 1))
+        b = b.reshape(-1)
+        
+        return A, b
+
+    
+    def get_2D_lattice_matrix_PSD_difficult(self, dim_x, dim_y, eigenvalue_spread=1e3, regularization_strength=1e-2, noise_strength=1e-2, show=False):
+        number_nodes = dim_x * dim_y
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Apply the lattice padding mask to B
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        B = B * A_pad
+        
+        # Step 3: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Apply lattice padding mask to keep the original zero entries
+        A = A * A_pad  # Ensure zero entries remain zero
+        
+        # Step 4: Perform eigenvalue decomposition
+        eigvals, eigvecs = np.linalg.eigh(A)
+        
+        # Step 5: Modify the eigenvalue spectrum with a larger spread
+        eigvals = np.linspace(1, eigenvalue_spread, number_nodes)
+        
+        # Ensure no eigenvalues are too small
+        eigvals = np.clip(eigvals, 1e-2, None)
+        
+        # Step 6: Reconstruct the matrix A with the modified eigenvalue spectrum
+        A = eigvecs @ np.diag(eigvals) @ eigvecs.T
+        
+        # Step 7: Add larger regularization to avoid ill-conditioning
+        A += regularization_strength * np.eye(number_nodes)
+        
+        # Step 8: Apply lattice padding mask again to preserve zero entries
+        A = A * A_pad  # Ensure zero entries remain zero
+        
+        # Step 9: Introduce random noise to the non-zero entries
+        noise = noise_strength * np.random.randn(number_nodes, number_nodes)
+        A += noise * A_pad  # Apply noise only where the mask is non-zero
+        
+        # Symmetrize A to handle floating-point errors
+        A = (A + A.T) / 2
+        
+        # Check condition number
+        condition_number = np.linalg.cond(A)
+        if show:
+            print(f"Condition number of A: {condition_number}")
+        
+        # Step 10: Create a random vector b
+        b = np.abs(np.random.randn(number_nodes, 1))
+        b = b.reshape(-1)
+        
+        return A, b
+
+    def get_2D_lattice_matrix_PSD_difficult_target(self, dim_x, dim_y, target_condition_number=3000):
+        number_nodes = dim_x * dim_y
+
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+
+        # Step 2: Apply the lattice padding mask to B
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        B = B * A_pad
+
+        # Step 3: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+
+        # Apply lattice padding mask to keep the original zero entries
+        A = A * A_pad  # Ensure zero entries remain zero
+
+        # Step 4: Perform eigenvalue decomposition
+        eigvals, eigvecs = np.linalg.eigh(A)
+
+        # Step 5: Modify the eigenvalue spectrum to exactly achieve the target condition number
+        max_eigenvalue = 1.0  # Set the largest eigenvalue to 1
+        min_eigenvalue = max_eigenvalue / target_condition_number  # Set smallest eigenvalue to 1/3000
+
+        # Manually set eigenvalues between min_eigenvalue and max_eigenvalue
+        eigvals = np.linspace(min_eigenvalue, max_eigenvalue, number_nodes)
+
+        # Step 6: Reconstruct the matrix A with the modified eigenvalue spectrum
+        A = eigvecs @ np.diag(eigvals) @ eigvecs.T
+
+        # Step 7: Apply lattice padding mask again to preserve zero entries
+        A = A * A_pad  # Ensure zero entries remain zero
+
+        # Step 8: Check the condition number
+        condition_number = np.linalg.cond(A)
+        print(f"Condition number of A: {condition_number}")
+
+        # Step 9: Create a random vector b
+        b = np.abs(np.random.randn(number_nodes, 1))
+        b = b.reshape(-1)
+
+        return A, b
+
+
+
+
+    
+    def get_2D_lattice_matrix_PSD_diagonal_dominant(self, dim_x, dim_y, dominance_factor=10):
+        number_nodes = dim_x * dim_y
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Apply the lattice padding mask to B
+        A_pad = self.get_2D_lattice_padding(dim_x, dim_y)
+        B = B * A_pad  # Apply padding to B
+        
+        # Step 3: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Step 4: Add diagonal dominance
+        diag_values = np.abs(np.diag(A)) + dominance_factor
+        np.fill_diagonal(A, diag_values)
+        
+        # Step 5: Ensure symmetry (A should already be symmetric by construction, but for safety)
+        A = (A + A.T) / 2  # Symmetrize A to handle any floating-point errors
+        
+        # Step 6: Create a random vector b
+        b = np.abs(np.random.randn(number_nodes, 1))
+        b = b.reshape(-1)
+        
+        return A, b
+
+
+    def get_1D_line_matrix_PSD(self, dim, scaling=False):
+        number_nodes = dim * 1
+        
+        # Step 1: Generate a random matrix B
+        B = np.random.randn(number_nodes, number_nodes)
+        
+        # Step 2: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+        
+        # Step 3: Apply the lattice padding mask
+        A_pad = self.fetch_1D_line_padding(dim)
+        A = A * A_pad
+        
+        # Step 4: Ensure symmetry and apply any necessary adjustments
+        A = (A + A.T) / 2  # Symmetrize A
+        
+        # Optional scaling
+        if scaling:
+            scaling_factors_A = np.random.randint(0, scaling, size=A.shape)
+            A = A * scaling_factors_A
+
+        if scaling:
+            scaling_factors_b = np.random.randint(0, scaling, size=[A.shape[0], 1])
+            b = scaling_factors_b
+        else:
+            b = np.abs(np.random.randn(number_nodes, 1))
+        
+        b = b.reshape(-1)
+        
+        return A, b
+    
+    def generate_SLAM_dataset_PSD(self, file_path):
+        """Return a sparse, symmetric, positive, normal distributed and normalized data matrix and observations vector"""
+        
+        adjacency_matrix = self.get_SLAM_data_padding(file_path)
+        dim = adjacency_matrix.shape[0]
+
+        B = np.random.randn(dim, dim)
+
+        # Step 2: Construct A as B^T B to ensure A is positive semi-definite
+        A = np.dot(B.T, B)
+
+        A_sparce = A * adjacency_matrix
+
+        A = self.symmetric(np.triu(A_sparce)) + np.diag(np.diag(A))
+
+        # Step 7: Generate observations vector b
+        b = np.abs(np.random.randn(dim, 1))
+        b = b.reshape(-1)
+
+        # Step 8: Save files
+        desired_part = file_path.split('/')[-1].rsplit('.', 1)[0]
+        directory_path = os.path.join(os.path.dirname(os.path.dirname(file_path)), 'gbp_data')
+        savefile_factor = os.path.join(directory_path, f'{desired_part}_factor_data.txt')
+        savefile_marginal = os.path.join(directory_path, f'{desired_part}_marginal_data.txt')
+
+        np.savetxt(savefile_factor, A)
+        np.savetxt(savefile_marginal, b)
+        
+        return A, b
+    
 # 2D Lattice Problem ---------------------------------
 
     def get_sparse_tree_matrix(self, dim, sparcity_threshold=-0.25):
@@ -317,3 +676,77 @@ class DataGenerator:
             A[j][i] = 0
 
         return A
+    
+
+    def parse_g20_file(self, file_path):
+        vertices = set()  # Use a set to ensure unique vertices
+        edges = []
+
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                parts = line.strip().split()
+                if parts[0] == 'VERTEX_SE2':
+                    vertex_id = int(parts[1])
+                    vertices.add(vertex_id)
+                elif parts[0] == 'EDGE_SE2':
+                    vertex1 = int(parts[1])
+                    vertex2 = int(parts[2])
+                    edges.append((vertex1, vertex2))
+
+        return sorted(vertices), edges  # Sorting to maintain order
+
+    def create_adjacency_matrix(self, vertices, edges):
+        n = len(vertices)
+        adjacency_matrix = np.zeros((n, n), dtype=int)
+
+        vertex_index = {vertex: idx for idx, vertex in enumerate(vertices)}
+
+        for edge in edges:
+            vertex1, vertex2 = edge
+            idx1 = vertex_index[vertex1]
+            idx2 = vertex_index[vertex2]
+            adjacency_matrix[idx1][idx2] = 1
+            adjacency_matrix[idx2][idx1] = 1  # Assuming the graph is undirected
+
+        return adjacency_matrix
+
+    def get_SLAM_data_padding(self, filename):
+        vertices, edges = self.parse_g20_file(filename)
+        adjacency_matrix = self.create_adjacency_matrix(vertices, edges)
+        return adjacency_matrix
+
+    def generate_SLAM_dataset(self, file_path):
+        """Return a sparse, symmetric, positive, normal distributed and normalized data matrix and observations vector"""
+        
+        adjacency_matrix = self.get_SLAM_data_padding(file_path)
+        
+        dim = adjacency_matrix.shape[0]
+
+        A_rand = np.random.randn(dim, dim)
+
+        A_sparce = A_rand * adjacency_matrix
+
+        A = self.symmetric(np.triu(A_sparce)) + np.diag(np.diag(A_rand))
+        A = np.abs(A)
+
+        b = np.abs(np.random.randn(dim, 1))
+        b = b / np.sum(b)
+        b = b.reshape(-1)
+
+        # extract file
+        desired_part = file_path.split('/')[-1].rsplit('.', 1)[0]
+        directory_path = os.path.join(os.path.dirname(os.path.dirname(file_path)), 'gbp_data')
+        savefile = os.path.join(directory_path, desired_part)
+
+        np.savetxt(f'{savefile}_factor_data.txt', A)
+        np.savetxt(f'{savefile}_marginal_data.txt', b)
+        
+        return
+    
+    def fetch_SLAM_dataset(self, file_path_factor, file_path_marginal):
+
+        A = np.loadtxt(file_path_factor)
+        b = np.loadtxt(file_path_marginal)
+
+        return A, b
