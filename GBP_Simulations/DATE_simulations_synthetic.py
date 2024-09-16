@@ -98,22 +98,32 @@ result_analyzer = AnalyzeResult()
 """ ------------------------- SIMULATION SETUP ------------------------- """
 
 # Number of nodes
-num_nodes = 1000
+num_nodes = 10000
 sync_convergence_threshold = 1*10**-8
 async_convergence_threshold = 1*10**-5
 
 # starting mae for convergence
 starting_mae_for_simulation = 10
 
-RESIDUAL = []
-
 # total number of simulations
-number_simulations = 3
-num_iterations = 3
+number_simulations = 25
+num_iterations = 10
 
 # filename
-filename_baseline = 'lattice_1000_static'
-filename_residual = 'lattice_1000_dynamic'
+# filename_baseline = 'line_1000_static'
+# filename_residual = 'line_1000_dynamic'
+
+# filename_baseline = 'lattice_1000_static'
+# filename_residual = 'lattice_1000_dynamic'
+
+# filename_baseline = 'line_10000_static'
+# filename_residual = 'line_10000_dynamic'
+
+filename_baseline = 'lattice_10000_static'
+filename_residual = 'lattice_10000_dynamic'
+
+print(f"================== {filename_baseline} ==================")
+print(f"================== {filename_residual} ==================")
 
 # unique np pairs
 baseline_np_dicts = unique_np_pairs(filename_baseline, 'design_summary_static.csv')
@@ -129,8 +139,10 @@ for ns in range(number_simulations):
     print(f"-------------- GENERATING GBP MATRIX: {ns+1} --------------")
     sum_of_iterations = 0
     for _ in range(1000):
-        A,b = data_gen.get_2D_lattice_matrix_PSD_difficult(int(math.sqrt(num_nodes)), int(math.sqrt(num_nodes)+1), eigenvalue_spread=1e-5, regularization_strength=1e-2, noise_strength=1e-2)
         # A,b = data_gen.get_1D_line_matrix_PSD_difficult(num_nodes, eigenvalue_spread=1e-5, regularization_strength=1e-2, noise_strength=1e-2)
+        # A,b = data_gen.get_2D_lattice_matrix_PSD_difficult(int(math.sqrt(num_nodes)), int(math.sqrt(num_nodes)+1), eigenvalue_spread=1e-5, regularization_strength=1e-2, noise_strength=1e-2)
+
+        A,b = data_gen.get_2D_lattice_matrix_PSD_difficult(int(math.sqrt(num_nodes)), int(math.sqrt(num_nodes)), eigenvalue_spread=1e-5, regularization_strength=1e-2, noise_strength=1e-2)
         graph = NetworkxGraph(A)
         P_i, mu_i, N_i, P_ii, mu_ii, P_ij, mu_ij, iter_dist, stand_divs, means, iteration = run_GaBP_SYNC_ACCELERATED(A, b, max_iter=1000, mae=False, convergence_threshold=sync_convergence_threshold, show=False)
         sum_of_iterations += iteration
