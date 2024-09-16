@@ -144,32 +144,36 @@ for ns in range(number_simulations):
     print(f"-------------- SUCCESSFULLY BUILT GBP MATRIX: {ns+1} --------------")
 
     # ------------------- iterate over all np pairs in order to compute latencies -------------------
-    
+        
     # ------------------- baseline -------------------
+    print(f" ============== BASELINE = {ns+1} ============== ")
     for D_BASELINE in baseline_np_dicts:
         sum_of_iterations = 0
         for it in range(0,num_iterations):
             x = True
             while x:
-                P_i, mu_i, iteration, _ = run_GaBP_HARDWARE_ACCELERATED(A, b, caching=False, node_updates_per_pe=D_BASELINE['n'], number_pes=D_BASELINE['p'], TRUE_MEAN=final_mean, max_iter=1000, mae=True, convergence_threshold=async_convergence_threshold, show=False)
-                if iteration < 1000-1:
+                P_i, mu_i, iteration, _ = run_GaBP_HARDWARE_ACCELERATED(A, b, caching=False, node_updates_per_pe=D_BASELINE['n'], number_pes=D_BASELINE['p'], TRUE_MEAN=final_mean, max_iter=1500, mae=True, convergence_threshold=async_convergence_threshold, show=False)
+                if iteration < 1500-1:
                     x = False
             sum_of_iterations += iteration
         ave = sum_of_iterations/num_iterations
         D_BASELINE['iterations'].append(ave)
-
+        print(f"(n={D_BASELINE['n']},p={D_BASELINE['p']}) => Streams = {ave}")
+        
     # ------------------- residual -------------------
+    print(f" ============== RESIDUAL = {ns+1} ============== ")
     for D_RESIDUAL in residual_np_dicts:
         sum_of_iterations = 0
         for it in range(0,num_iterations):
             x = True
-            while iteration > 1000-1:
-                P_i, mu_i, iteration = run_GaBP_HARDWARE_ACCELERATED_RESIDUAL(A, b, caching=True, node_updates_per_pe=D_RESIDUAL['n'], number_pes=D_RESIDUAL['p'], TRUE_MEAN=final_mean, max_iter=1000, mae=True, convergence_threshold=async_convergence_threshold, show=False)
-                if iteration < 1000-1:
+            while x:
+                P_i, mu_i, iteration = run_GaBP_HARDWARE_ACCELERATED_RESIDUAL(A, b, caching=True, node_updates_per_pe=D_RESIDUAL['n'], number_pes=D_RESIDUAL['p'], TRUE_MEAN=final_mean, max_iter=1500, mae=True, convergence_threshold=async_convergence_threshold, show=False)
+                if iteration < 1500-1:
                     x = False
             sum_of_iterations += iteration
         ave = sum_of_iterations/num_iterations
         D_RESIDUAL['iterations'].append(ave)
+        print(f"(n={D_RESIDUAL['n']},p={D_RESIDUAL['p']}) => Streams = {ave}")
 
 print("------ BASELINE ------")
 for D in baseline_np_dicts:
