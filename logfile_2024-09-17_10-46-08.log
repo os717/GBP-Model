@@ -1,0 +1,8 @@
+2024-09-17 10:46:08,416 - INFO - Script started at 2024-09-17 10:46:08.416620
+2024-09-17 10:46:08,427 - INFO - Baseline filename: lattice_10000_static
+2024-09-17 10:46:08,427 - INFO - Residual filename: lattice_10000_dynamic
+2024-09-17 10:46:08,427 - INFO - Extracting unique (n, p) pairs from design_summary_static.csv
+2024-09-17 10:46:08,433 - INFO - Extracting unique (n, p) pairs from design_summary_dynamic.csv
+2024-09-17 10:46:08,436 - INFO - Eigenvalue Spread 0.0001
+2024-09-17 10:46:08,436 - INFO - Starting simulation #1
+2024-09-17 11:06:22,391 - ERROR - Error: Restarting GBP matrix creation

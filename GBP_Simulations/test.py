@@ -40,11 +40,11 @@ for _ in range(1000):
     # b = 10 * b / 0.00874062402639083
     
     graph = NetworkxGraph(A)
-    P_i, mu_i, N_i, P_ii, mu_ii, P_ij, mu_ij, iter_dist, stand_divs, means, iteration = run_GaBP_SYNC_ACCELERATED(A, b, max_iter=200, mae=False, convergence_threshold=sync_convergence_threshold, show=True)
+    P_i, mu_i, N_i, P_ii, mu_ii, P_ij, mu_ij, iter_dist, stand_divs, means, iteration = run_GaBP_SYNC_ACCELERATED(A, b, max_iter=10000, mae=False, convergence_threshold=sync_convergence_threshold, show=True)
     sum_of_iterations += iteration
     final_mean = list(mu_i)
     final_std = P_i
-    if iteration < 100000:
+    if iteration < 10000:
         break
     else:
         print("=========== RESTART ===========")

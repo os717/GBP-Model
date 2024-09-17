@@ -1,0 +1,31 @@
+2024-09-17 10:56:45,170 - INFO - Script started at 2024-09-17 10:56:45.170539
+2024-09-17 10:56:45,177 - INFO - Baseline filename: lattice_10000_static
+2024-09-17 10:56:45,177 - INFO - Residual filename: lattice_10000_dynamic
+2024-09-17 10:56:45,177 - INFO - Extracting unique (n, p) pairs from design_summary_static.csv
+2024-09-17 10:56:45,182 - INFO - Extracting unique (n, p) pairs from design_summary_dynamic.csv
+2024-09-17 10:56:45,185 - INFO - Eigenvalue Spread 0.1
+2024-09-17 10:56:45,186 - INFO - Starting simulation #1
+2024-09-17 11:13:20,462 - ERROR - Error: Restarting GBP matrix creation
+2024-09-17 11:21:07,875 - INFO - Successfully built GBP matrix for simulation #1
+2024-09-17 11:32:36,027 - INFO - Baseline: lattice(n=101, p=4) iterations = 387
+2024-09-17 11:42:16,224 - INFO - Baseline: lattice(n=139, p=3) iterations = 324
+2024-09-17 11:58:06,568 - INFO - Baseline: lattice(n=101, p=3) iterations = 539
+2024-09-17 12:07:14,312 - INFO - Baseline: lattice(n=126, p=4) iterations = 309
+2024-09-17 12:15:28,604 - INFO - Baseline: lattice(n=134, p=4) iterations = 279
+2024-09-17 12:25:52,838 - INFO - Baseline: lattice(n=126, p=3) iterations = 368
+2024-09-17 12:36:47,958 - INFO - Baseline: lattice(n=176, p=2) iterations = 385
+2024-09-17 12:50:16,835 - INFO - Baseline: lattice(n=151, p=2) iterations = 478
+2024-09-17 12:58:28,221 - INFO - Baseline: lattice(n=101, p=5) iterations = 279
+2024-09-17 13:03:50,972 - INFO - Residual: lattice(n=96, p=4) iterations = 177
+2024-09-17 13:13:52,654 - INFO - Residual: lattice(n=185, p=1) iterations = 355
+2024-09-17 13:19:25,827 - INFO - Residual: lattice(n=121, p=3) iterations = 194
+2024-09-17 13:24:04,841 - INFO - Residual: lattice(n=145, p=3) iterations = 157
+2024-09-17 13:29:19,348 - INFO - Residual: lattice(n=124, p=3) iterations = 181
+2024-09-17 13:35:41,414 - INFO - Residual: lattice(n=103, p=3) iterations = 217
+2024-09-17 13:43:26,993 - INFO - Residual: lattice(n=121, p=2) iterations = 274
+2024-09-17 13:48:48,805 - INFO - Residual: lattice(n=166, p=2) iterations = 203
+2024-09-17 13:54:43,440 - INFO - Residual: lattice(n=145, p=2) iterations = 230
+2024-09-17 14:02:34,040 - INFO - Residual: lattice(n=129, p=2) iterations = 258
+2024-09-17 14:02:34,040 - INFO - ------ BASELINE ------
+2024-09-17 14:02:34,041 - INFO - [{'n': 101, 'p': 4, 'iterations': [387.0], 'iterations_ave': 387.0}, {'n': 139, 'p': 3, 'iterations': [324.0], 'iterations_ave': 324.0}, {'n': 101, 'p': 3, 'iterations': [539.0], 'iterations_ave': 539.0}, {'n': 126, 'p': 4, 'iterations': [309.0], 'iterations_ave': 309.0}, {'n': 134, 'p': 4, 'iterations': [279.0], 'iterations_ave': 279.0}, {'n': 126, 'p': 3, 'iterations': [368.0], 'iterations_ave': 368.0}, {'n': 176, 'p': 2, 'iterations': [385.0], 'iterations_ave': 385.0}, {'n': 151, 'p': 2, 'iterations': [478.0], 'iterations_ave': 478.0}, {'n': 101, 'p': 5, 'iterations': [279.0], 'iterations_ave': 279.0}]
+2024-09-17 14:02:34,041 - INFO - Extracting data from design_summary_static.csv and updating it for lattice_10000_static

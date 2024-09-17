@@ -1,0 +1,17 @@
+2024-09-17 14:00:03,465 - INFO - Script started at 2024-09-17 14:00:03.465242
+2024-09-17 14:00:03,469 - INFO - Baseline filename: line_10000_static
+2024-09-17 14:00:03,469 - INFO - Residual filename: line_10000_dynamic
+2024-09-17 14:00:03,470 - INFO - Extracting unique (n, p) pairs from design_summary_static.csv
+2024-09-17 14:00:03,482 - INFO - Extracting unique (n, p) pairs from design_summary_dynamic.csv
+2024-09-17 14:00:03,491 - INFO - Eigenvalue Spread 0.1
+2024-09-17 14:00:03,492 - INFO - Starting simulation #1
+2024-09-17 14:06:28,134 - INFO - Successfully built GBP matrix for simulation #1
+2024-09-17 14:14:31,947 - INFO - Baseline: lattice(n=192, p=4) iterations = 139
+2024-09-17 14:14:31,947 - INFO - Baseline: lattice(n=192, p=4) AVERAGE = 139
+2024-09-17 14:14:31,947 - INFO - ====================
+2024-09-17 14:18:49,169 - INFO - Baseline: lattice(n=240, p=4) iterations = 105
+2024-09-17 14:18:49,169 - INFO - Baseline: lattice(n=240, p=4) AVERAGE = 105
+2024-09-17 14:18:49,169 - INFO - ====================
+2024-09-17 14:23:47,686 - INFO - Baseline: lattice(n=192, p=3) iterations = 186
+2024-09-17 14:23:47,698 - INFO - Baseline: lattice(n=192, p=3) AVERAGE = 186
+2024-09-17 14:23:47,698 - INFO - ====================

@@ -1,0 +1,257 @@
+2024-09-17 13:53:24,406 - INFO - Script started at 2024-09-17 13:53:24.406320
+2024-09-17 13:53:24,414 - INFO - Baseline filename: line_1000_static
+2024-09-17 13:53:24,414 - INFO - Residual filename: line_1000_dynamic
+2024-09-17 13:53:24,414 - INFO - Extracting unique (n, p) pairs from design_summary_static.csv
+2024-09-17 13:53:24,417 - INFO - Extracting unique (n, p) pairs from design_summary_dynamic.csv
+2024-09-17 13:53:24,419 - INFO - Eigenvalue Spread 0.1
+2024-09-17 13:53:24,420 - INFO - Starting simulation #1
+2024-09-17 13:53:54,894 - INFO - Successfully built GBP matrix for simulation #1
+2024-09-17 13:53:55,056 - INFO - Baseline: lattice(n=137, p=4) iterations = 16
+2024-09-17 13:53:55,234 - INFO - Baseline: lattice(n=137, p=4) iterations = 18
+2024-09-17 13:53:55,428 - INFO - Baseline: lattice(n=137, p=4) iterations = 20
+2024-09-17 13:53:55,592 - INFO - Baseline: lattice(n=137, p=4) iterations = 16
+2024-09-17 13:53:55,761 - INFO - Baseline: lattice(n=137, p=4) iterations = 17
+2024-09-17 13:53:55,939 - INFO - Baseline: lattice(n=137, p=4) iterations = 18
+2024-09-17 13:53:56,086 - INFO - Baseline: lattice(n=137, p=4) iterations = 15
+2024-09-17 13:53:56,256 - INFO - Baseline: lattice(n=137, p=4) iterations = 17
+2024-09-17 13:53:56,499 - INFO - Baseline: lattice(n=137, p=4) iterations = 25
+2024-09-17 13:53:56,665 - INFO - Baseline: lattice(n=137, p=4) iterations = 17
+2024-09-17 13:53:56,665 - INFO - Baseline: lattice(n=137, p=4) AVERAGE = 17
+2024-09-17 13:53:56,665 - INFO - ====================
+2024-09-17 13:53:56,834 - INFO - Baseline: lattice(n=128, p=4) iterations = 19
+2024-09-17 13:53:57,014 - INFO - Baseline: lattice(n=128, p=4) iterations = 20
+2024-09-17 13:53:57,218 - INFO - Baseline: lattice(n=128, p=4) iterations = 20
+2024-09-17 13:53:57,445 - INFO - Baseline: lattice(n=128, p=4) iterations = 20
+2024-09-17 13:53:57,684 - INFO - Baseline: lattice(n=128, p=4) iterations = 21
+2024-09-17 13:53:57,903 - INFO - Baseline: lattice(n=128, p=4) iterations = 19
+2024-09-17 13:53:58,077 - INFO - Baseline: lattice(n=128, p=4) iterations = 17
+2024-09-17 13:53:58,261 - INFO - Baseline: lattice(n=128, p=4) iterations = 20
+2024-09-17 13:53:58,427 - INFO - Baseline: lattice(n=128, p=4) iterations = 18
+2024-09-17 13:53:58,595 - INFO - Baseline: lattice(n=128, p=4) iterations = 18
+2024-09-17 13:53:58,595 - INFO - Baseline: lattice(n=128, p=4) AVERAGE = 19
+2024-09-17 13:53:58,596 - INFO - ====================
+2024-09-17 13:53:58,773 - INFO - Baseline: lattice(n=137, p=3) iterations = 25
+2024-09-17 13:53:58,916 - INFO - Baseline: lattice(n=137, p=3) iterations = 20
+2024-09-17 13:53:59,060 - INFO - Baseline: lattice(n=137, p=3) iterations = 21
+2024-09-17 13:53:59,277 - INFO - Baseline: lattice(n=137, p=3) iterations = 32
+2024-09-17 13:53:59,453 - INFO - Baseline: lattice(n=137, p=3) iterations = 25
+2024-09-17 13:53:59,595 - INFO - Baseline: lattice(n=137, p=3) iterations = 20
+2024-09-17 13:53:59,780 - INFO - Baseline: lattice(n=137, p=3) iterations = 27
+2024-09-17 13:53:59,950 - INFO - Baseline: lattice(n=137, p=3) iterations = 25
+2024-09-17 13:54:00,107 - INFO - Baseline: lattice(n=137, p=3) iterations = 22
+2024-09-17 13:54:00,268 - INFO - Baseline: lattice(n=137, p=3) iterations = 23
+2024-09-17 13:54:00,268 - INFO - Baseline: lattice(n=137, p=3) AVERAGE = 24
+2024-09-17 13:54:00,268 - INFO - ====================
+2024-09-17 13:54:00,417 - INFO - Baseline: lattice(n=97, p=4) iterations = 21
+2024-09-17 13:54:00,636 - INFO - Baseline: lattice(n=97, p=4) iterations = 26
+2024-09-17 13:54:00,842 - INFO - Baseline: lattice(n=97, p=4) iterations = 24
+2024-09-17 13:54:01,054 - INFO - Baseline: lattice(n=97, p=4) iterations = 24
+2024-09-17 13:54:01,237 - INFO - Baseline: lattice(n=97, p=4) iterations = 20
+2024-09-17 13:54:01,448 - INFO - Baseline: lattice(n=97, p=4) iterations = 31
+2024-09-17 13:54:01,637 - INFO - Baseline: lattice(n=97, p=4) iterations = 28
+2024-09-17 13:54:01,840 - INFO - Baseline: lattice(n=97, p=4) iterations = 29
+2024-09-17 13:54:01,993 - INFO - Baseline: lattice(n=97, p=4) iterations = 21
+2024-09-17 13:54:02,159 - INFO - Baseline: lattice(n=97, p=4) iterations = 24
+2024-09-17 13:54:02,159 - INFO - Baseline: lattice(n=97, p=4) AVERAGE = 24
+2024-09-17 13:54:02,159 - INFO - ====================
+2024-09-17 13:54:02,410 - INFO - Baseline: lattice(n=97, p=3) iterations = 45
+2024-09-17 13:54:02,603 - INFO - Baseline: lattice(n=97, p=3) iterations = 30
+2024-09-17 13:54:02,811 - INFO - Baseline: lattice(n=97, p=3) iterations = 33
+2024-09-17 13:54:03,040 - INFO - Baseline: lattice(n=97, p=3) iterations = 34
+2024-09-17 13:54:03,248 - INFO - Baseline: lattice(n=97, p=3) iterations = 30
+2024-09-17 13:54:03,485 - INFO - Baseline: lattice(n=97, p=3) iterations = 35
+2024-09-17 13:54:03,730 - INFO - Baseline: lattice(n=97, p=3) iterations = 38
+2024-09-17 13:54:03,967 - INFO - Baseline: lattice(n=97, p=3) iterations = 42
+2024-09-17 13:54:04,130 - INFO - Baseline: lattice(n=97, p=3) iterations = 31
+2024-09-17 13:54:04,289 - INFO - Baseline: lattice(n=97, p=3) iterations = 30
+2024-09-17 13:54:04,290 - INFO - Baseline: lattice(n=97, p=3) AVERAGE = 34
+2024-09-17 13:54:04,290 - INFO - ====================
+2024-09-17 13:54:04,487 - INFO - Baseline: lattice(n=137, p=5) iterations = 15
+2024-09-17 13:54:04,666 - INFO - Baseline: lattice(n=137, p=5) iterations = 14
+2024-09-17 13:54:04,857 - INFO - Baseline: lattice(n=137, p=5) iterations = 15
+2024-09-17 13:54:05,043 - INFO - Baseline: lattice(n=137, p=5) iterations = 14
+2024-09-17 13:54:05,225 - INFO - Baseline: lattice(n=137, p=5) iterations = 14
+2024-09-17 13:54:05,396 - INFO - Baseline: lattice(n=137, p=5) iterations = 13
+2024-09-17 13:54:05,579 - INFO - Baseline: lattice(n=137, p=5) iterations = 14
+2024-09-17 13:54:05,766 - INFO - Baseline: lattice(n=137, p=5) iterations = 14
+2024-09-17 13:54:05,933 - INFO - Baseline: lattice(n=137, p=5) iterations = 13
+2024-09-17 13:54:06,127 - INFO - Baseline: lattice(n=137, p=5) iterations = 15
+2024-09-17 13:54:06,127 - INFO - Baseline: lattice(n=137, p=5) AVERAGE = 14
+2024-09-17 13:54:06,127 - INFO - ====================
+2024-09-17 13:54:06,333 - INFO - Baseline: lattice(n=97, p=2) iterations = 54
+2024-09-17 13:54:06,582 - INFO - Baseline: lattice(n=97, p=2) iterations = 65
+2024-09-17 13:54:06,728 - INFO - Baseline: lattice(n=97, p=2) iterations = 36
+2024-09-17 13:54:06,950 - INFO - Baseline: lattice(n=97, p=2) iterations = 59
+2024-09-17 13:54:07,115 - INFO - Baseline: lattice(n=97, p=2) iterations = 40
+2024-09-17 13:54:07,347 - INFO - Baseline: lattice(n=97, p=2) iterations = 49
+2024-09-17 13:54:07,615 - INFO - Baseline: lattice(n=97, p=2) iterations = 57
+2024-09-17 13:54:07,866 - INFO - Baseline: lattice(n=97, p=2) iterations = 54
+2024-09-17 13:54:08,079 - INFO - Baseline: lattice(n=97, p=2) iterations = 50
+2024-09-17 13:54:08,278 - INFO - Baseline: lattice(n=97, p=2) iterations = 50
+2024-09-17 13:54:08,278 - INFO - Baseline: lattice(n=97, p=2) AVERAGE = 51
+2024-09-17 13:54:08,278 - INFO - ====================
+2024-09-17 13:54:21,891 - INFO - Residual: lattice(n=137, p=4) iterations = 15
+2024-09-17 13:54:22,060 - INFO - Residual: lattice(n=137, p=4) iterations = 15
+2024-09-17 13:54:22,238 - INFO - Residual: lattice(n=137, p=4) iterations = 15
+2024-09-17 13:54:22,445 - INFO - Residual: lattice(n=137, p=4) iterations = 15
+2024-09-17 13:54:22,660 - INFO - Residual: lattice(n=137, p=4) iterations = 14
+2024-09-17 13:54:22,885 - INFO - Residual: lattice(n=137, p=4) iterations = 14
+2024-09-17 13:54:23,120 - INFO - Residual: lattice(n=137, p=4) iterations = 14
+2024-09-17 13:54:23,334 - INFO - Residual: lattice(n=137, p=4) iterations = 14
+2024-09-17 13:54:23,545 - INFO - Residual: lattice(n=137, p=4) iterations = 15
+2024-09-17 13:54:23,747 - INFO - Residual: lattice(n=137, p=4) iterations = 14
+2024-09-17 13:54:23,747 - INFO - Residual: lattice(n=97, p=2) AVERAGE = 14
+2024-09-17 13:54:23,758 - INFO - ====================
+2024-09-17 13:54:31,101 - WARNING - Residual iteration count 1
+2024-09-17 13:54:38,686 - WARNING - Residual iteration count 2
+2024-09-17 13:54:46,428 - WARNING - Residual iteration count 3
+2024-09-17 13:54:46,529 - INFO - Residual: lattice(n=97, p=1) iterations = 26
+2024-09-17 13:54:54,209 - WARNING - Residual iteration count 1
+2024-09-17 13:55:01,684 - WARNING - Residual iteration count 2
+2024-09-17 13:55:09,360 - WARNING - Residual iteration count 3
+2024-09-17 13:55:09,468 - INFO - Residual: lattice(n=97, p=1) iterations = 27
+2024-09-17 13:55:09,584 - INFO - Residual: lattice(n=97, p=1) iterations = 28
+2024-09-17 13:55:09,698 - INFO - Residual: lattice(n=97, p=1) iterations = 27
+2024-09-17 13:55:09,805 - INFO - Residual: lattice(n=97, p=1) iterations = 27
+2024-09-17 13:55:17,481 - WARNING - Residual iteration count 1
+2024-09-17 13:55:25,281 - WARNING - Residual iteration count 2
+2024-09-17 13:55:32,770 - WARNING - Residual iteration count 3
+2024-09-17 13:55:32,907 - INFO - Residual: lattice(n=97, p=1) iterations = 27
+2024-09-17 13:55:33,050 - INFO - Residual: lattice(n=97, p=1) iterations = 27
+2024-09-17 13:55:40,462 - WARNING - Residual iteration count 1
+2024-09-17 13:55:48,113 - WARNING - Residual iteration count 2
+2024-09-17 13:55:55,827 - WARNING - Residual iteration count 3
+2024-09-17 13:56:03,367 - WARNING - Residual iteration count 4
+2024-09-17 13:56:03,367 - ERROR - Residual failed after 5 attempts
+2024-09-17 13:56:03,503 - INFO - Residual: lattice(n=97, p=1) iterations = 27
+2024-09-17 13:56:10,970 - WARNING - Residual iteration count 1
+2024-09-17 13:56:18,405 - WARNING - Residual iteration count 2
+2024-09-17 13:56:18,508 - INFO - Residual: lattice(n=97, p=1) iterations = 27
+2024-09-17 13:56:18,508 - INFO - Residual: lattice(n=97, p=2) AVERAGE = 27
+2024-09-17 13:56:18,509 - INFO - ====================
+2024-09-17 13:56:18,631 - INFO - Residual: lattice(n=137, p=3) iterations = 15
+2024-09-17 13:56:38,906 - WARNING - Residual iteration count 1
+2024-09-17 13:56:39,044 - INFO - Residual: lattice(n=137, p=3) iterations = 17
+2024-09-17 13:56:39,263 - INFO - Residual: lattice(n=137, p=3) iterations = 28
+2024-09-17 13:56:57,239 - WARNING - Residual iteration count 1
+2024-09-17 13:56:57,391 - INFO - Residual: lattice(n=137, p=3) iterations = 16
+2024-09-17 13:56:57,550 - INFO - Residual: lattice(n=137, p=3) iterations = 16
+2024-09-17 13:56:57,724 - INFO - Residual: lattice(n=137, p=3) iterations = 16
+2024-09-17 13:56:57,854 - INFO - Residual: lattice(n=137, p=3) iterations = 14
+2024-09-17 13:56:58,070 - INFO - Residual: lattice(n=137, p=3) iterations = 23
+2024-09-17 13:56:58,192 - INFO - Residual: lattice(n=137, p=3) iterations = 15
+2024-09-17 13:56:58,313 - INFO - Residual: lattice(n=137, p=3) iterations = 15
+2024-09-17 13:56:58,313 - INFO - Residual: lattice(n=97, p=2) AVERAGE = 17
+2024-09-17 13:56:58,313 - INFO - ====================
+2024-09-17 13:57:14,207 - WARNING - Residual iteration count 1
+2024-09-17 13:57:27,800 - WARNING - Residual iteration count 2
+2024-09-17 13:57:40,750 - WARNING - Residual iteration count 3
+2024-09-17 13:57:56,669 - WARNING - Residual iteration count 4
+2024-09-17 13:57:56,669 - ERROR - Residual failed after 5 attempts
+2024-09-17 13:58:13,005 - WARNING - Residual iteration count 1
+2024-09-17 13:58:26,917 - WARNING - Residual iteration count 2
+2024-09-17 13:58:40,347 - WARNING - Residual iteration count 3
+2024-09-17 13:58:56,399 - WARNING - Residual iteration count 4
+2024-09-17 13:58:56,399 - ERROR - Residual failed after 5 attempts
+2024-09-17 13:59:09,398 - WARNING - Residual iteration count 1
+2024-09-17 13:59:22,395 - WARNING - Residual iteration count 2
+2024-09-17 13:59:39,293 - WARNING - Residual iteration count 3
+2024-09-17 13:59:52,393 - WARNING - Residual iteration count 4
+2024-09-17 13:59:52,394 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:00:05,819 - WARNING - Residual iteration count 1
+2024-09-17 14:00:40,538 - WARNING - Residual iteration count 2
+2024-09-17 14:01:14,337 - WARNING - Residual iteration count 3
+2024-09-17 14:01:49,853 - WARNING - Residual iteration count 4
+2024-09-17 14:01:49,853 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:02:26,341 - WARNING - Residual iteration count 1
+2024-09-17 14:03:07,219 - WARNING - Residual iteration count 2
+2024-09-17 14:03:43,838 - WARNING - Residual iteration count 3
+2024-09-17 14:04:21,520 - WARNING - Residual iteration count 4
+2024-09-17 14:04:21,521 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:04:21,887 - INFO - Residual: lattice(n=97, p=3) iterations = 16
+2024-09-17 14:05:00,912 - WARNING - Residual iteration count 1
+2024-09-17 14:05:33,297 - WARNING - Residual iteration count 2
+2024-09-17 14:05:51,713 - WARNING - Residual iteration count 3
+2024-09-17 14:06:07,688 - WARNING - Residual iteration count 4
+2024-09-17 14:06:07,689 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:06:20,209 - WARNING - Residual iteration count 1
+2024-09-17 14:06:37,429 - WARNING - Residual iteration count 2
+2024-09-17 14:06:52,340 - WARNING - Residual iteration count 3
+2024-09-17 14:07:12,661 - WARNING - Residual iteration count 4
+2024-09-17 14:07:12,661 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:07:44,823 - WARNING - Residual iteration count 1
+2024-09-17 14:08:27,232 - WARNING - Residual iteration count 2
+2024-09-17 14:09:22,428 - WARNING - Residual iteration count 3
+2024-09-17 14:10:17,814 - WARNING - Residual iteration count 4
+2024-09-17 14:10:17,814 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:10:56,436 - WARNING - Residual iteration count 1
+2024-09-17 14:11:51,650 - WARNING - Residual iteration count 2
+2024-09-17 14:12:27,814 - WARNING - Residual iteration count 3
+2024-09-17 14:13:17,851 - WARNING - Residual iteration count 4
+2024-09-17 14:13:17,852 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:13:17,852 - INFO - Residual: lattice(n=97, p=2) AVERAGE = 16
+2024-09-17 14:13:17,852 - INFO - ====================
+2024-09-17 14:13:55,336 - WARNING - Residual iteration count 1
+2024-09-17 14:14:45,414 - WARNING - Residual iteration count 2
+2024-09-17 14:15:30,251 - WARNING - Residual iteration count 3
+2024-09-17 14:15:30,779 - INFO - Residual: lattice(n=137, p=2) iterations = 17
+2024-09-17 14:16:27,342 - WARNING - Residual iteration count 1
+2024-09-17 14:16:53,085 - WARNING - Residual iteration count 2
+2024-09-17 14:17:26,024 - WARNING - Residual iteration count 3
+2024-09-17 14:17:45,191 - WARNING - Residual iteration count 4
+2024-09-17 14:17:45,191 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:17:56,814 - WARNING - Residual iteration count 1
+2024-09-17 14:17:56,921 - INFO - Residual: lattice(n=137, p=2) iterations = 17
+2024-09-17 14:18:11,303 - WARNING - Residual iteration count 1
+2024-09-17 14:18:25,352 - WARNING - Residual iteration count 2
+2024-09-17 14:18:40,133 - WARNING - Residual iteration count 3
+2024-09-17 14:18:56,613 - WARNING - Residual iteration count 4
+2024-09-17 14:18:56,613 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:19:15,544 - WARNING - Residual iteration count 1
+2024-09-17 14:19:15,658 - INFO - Residual: lattice(n=137, p=2) iterations = 17
+2024-09-17 14:19:31,769 - WARNING - Residual iteration count 1
+2024-09-17 14:19:48,407 - WARNING - Residual iteration count 2
+2024-09-17 14:20:03,498 - WARNING - Residual iteration count 3
+2024-09-17 14:20:03,636 - INFO - Residual: lattice(n=137, p=2) iterations = 17
+2024-09-17 14:20:15,937 - WARNING - Residual iteration count 1
+2024-09-17 14:20:16,049 - INFO - Residual: lattice(n=137, p=2) iterations = 17
+2024-09-17 14:20:30,915 - WARNING - Residual iteration count 1
+2024-09-17 14:20:45,628 - WARNING - Residual iteration count 2
+2024-09-17 14:20:59,203 - WARNING - Residual iteration count 3
+2024-09-17 14:21:15,507 - WARNING - Residual iteration count 4
+2024-09-17 14:21:15,507 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:21:15,622 - INFO - Residual: lattice(n=137, p=2) iterations = 17
+2024-09-17 14:21:15,741 - INFO - Residual: lattice(n=137, p=2) iterations = 18
+2024-09-17 14:21:15,741 - INFO - Residual: lattice(n=97, p=2) AVERAGE = 17
+2024-09-17 14:21:15,741 - INFO - ====================
+2024-09-17 14:21:25,933 - WARNING - Residual iteration count 1
+2024-09-17 14:21:36,380 - WARNING - Residual iteration count 2
+2024-09-17 14:21:47,018 - WARNING - Residual iteration count 3
+2024-09-17 14:21:58,181 - WARNING - Residual iteration count 4
+2024-09-17 14:21:58,181 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:22:08,863 - WARNING - Residual iteration count 1
+2024-09-17 14:22:19,179 - WARNING - Residual iteration count 2
+2024-09-17 14:22:30,271 - WARNING - Residual iteration count 3
+2024-09-17 14:22:40,307 - WARNING - Residual iteration count 4
+2024-09-17 14:22:40,307 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:22:50,089 - WARNING - Residual iteration count 1
+2024-09-17 14:23:00,118 - WARNING - Residual iteration count 2
+2024-09-17 14:23:10,351 - WARNING - Residual iteration count 3
+2024-09-17 14:23:20,067 - WARNING - Residual iteration count 4
+2024-09-17 14:23:20,067 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:23:29,786 - WARNING - Residual iteration count 1
+2024-09-17 14:23:39,958 - WARNING - Residual iteration count 2
+2024-09-17 14:23:50,498 - WARNING - Residual iteration count 3
+2024-09-17 14:24:00,607 - WARNING - Residual iteration count 4
+2024-09-17 14:24:00,607 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:24:11,345 - WARNING - Residual iteration count 1
+2024-09-17 14:24:21,438 - WARNING - Residual iteration count 2
+2024-09-17 14:24:32,231 - WARNING - Residual iteration count 3
+2024-09-17 14:24:42,554 - WARNING - Residual iteration count 4
+2024-09-17 14:24:42,554 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:24:52,919 - WARNING - Residual iteration count 1
+2024-09-17 14:25:04,035 - WARNING - Residual iteration count 2
+2024-09-17 14:25:14,428 - WARNING - Residual iteration count 3
+2024-09-17 14:25:24,959 - WARNING - Residual iteration count 4
+2024-09-17 14:25:24,959 - ERROR - Residual failed after 5 attempts
+2024-09-17 14:25:34,876 - WARNING - Residual iteration count 1

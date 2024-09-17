@@ -1,0 +1,7 @@
+2024-09-17 10:19:09,879 - INFO - Script started at 2024-09-17 10:19:09.879490
+2024-09-17 10:19:09,888 - INFO - Baseline filename: lattice_10000_static
+2024-09-17 10:19:09,889 - INFO - Residual filename: lattice_10000_dynamic
+2024-09-17 10:19:09,889 - INFO - Extracting unique (n, p) pairs from design_summary_static.csv
+2024-09-17 10:19:09,893 - INFO - Extracting unique (n, p) pairs from design_summary_dynamic.csv
+2024-09-17 10:19:09,896 - INFO - Eigenvalue Spread #0
+2024-09-17 10:19:09,897 - INFO - Starting simulation #1
